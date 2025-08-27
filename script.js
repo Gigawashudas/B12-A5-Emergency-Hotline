@@ -32,12 +32,12 @@ container.innerHTML = cards.map(card => `
           </div>
           <!-- section-3 -->
           <div class="section-3">
-            <h2 class="service-number cursor-pointer text-[32px] text-3xl font-semibold">${card.number}</h2>
+            <h2 class="service-number w-fit cursor-pointer text-[32px] text-3xl font-semibold">${card.number}</h2>
             <p class="text-gray-400 text-[18px] bg-gray-100 rounded-2xl px-4 py-0.5 w-fit">${card.tag}</p>
           </div>
           <!-- button-section -->
           <div class="card-section-button roboto flex gap-2">
-            <button class="w-[50%] py-0.5 border border-gray-200 text-gray-400 rounded text-[16px]">
+            <button class="copy-btn w-[50%] cursor-pointer py-0.5 border border-gray-200 text-gray-400 rounded text-[16px]">
               <i class="fa-solid fa-copy"></i>
               <span> Copy</span>
             </button>
