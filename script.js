@@ -12,11 +12,10 @@ const cards = [
 ];
 
 // Generate cards with template literals
-document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("card-container");
+const container = document.getElementById("card-container");
 
-    container.classList.add("grid", "grid-col-3", "gap-[30px]")
-    container.innerHTML = cards.map(card => `
+container.classList.add("grid", "grid-col-3", "gap-[30px]")
+container.innerHTML = cards.map(card => `
     <div class="card flex flex-col gap-3 rounded-2xl bg-white p-6">
           <!-- section-1 -->
           <div class="flex justify-between items-center">
@@ -24,16 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="card-section-1 flex justify-center items-center rounded-2xl w-[60px] h-[60px] bg-[${card.iconBg}]">
               <img class="w-[32px] h-[32px]" src="${card.icon}" alt="">
             </div>
-            <i class="fa-regular fa-heart fa-lg text-gray-500"></i>
+            <i class="fa-regular fa-heart fa-lg text-gray-500 heart-btn cursor-pointer"></i>
           </div>
           <!-- section-2 -->
           <div class="card-section-2">
-            <h3 class="text-[18px] font-semibold">${card.title}</h3>
+            <h3 class="service-name text-[18px] font-semibold">${card.title}</h3>
             <p class="text-gray-500">${card.subtitle}</p>
           </div>
           <!-- section-3 -->
           <div class="section-3">
-            <h2 class="text-[32px] text-3xl font-semibold">${card.number}</h2>
+            <h2 class="service-number cursor-pointer text-[32px] text-3xl font-semibold">${card.number}</h2>
             <p class="text-gray-400 text-[18px] bg-gray-100 rounded-2xl px-4 py-0.5 w-fit">${card.tag}</p>
           </div>
           <!-- button-section -->
@@ -42,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <i class="fa-solid fa-copy"></i>
               <span> Copy</span>
             </button>
-            <button class="w-[50%] bg-[#00a639] text-white rounded text-[16px]">
+            <button class="call-btn cursor-pointer w-[50%] bg-[#00a639] text-white rounded text-[16px]">
               <i class="fa-solid fa-phone-flip fa-rotate-90 fa-sm"></i>
               <span>Call</span>
             </button>
@@ -50,19 +49,107 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
   `).join("");
 
-    // Add copy functionality
-    document.querySelectorAll(".copy-btn").forEach(btn => {
-        btn.addEventListener("click", async () => {
-            const number = btn.getAttribute("data-number");
-            try {
-                await navigator.clipboard.writeText(number);
-                const span = btn.querySelector("span");
-                const prev = span.textContent;
-                span.textContent = "Copied!";
-                setTimeout(() => span.textContent = prev, 1200);
-            } catch {
-                alert("Copy not supported on this browser");
-            }
-        });
+
+//  Heart functionality
+const heartCountEl = document.getElementById("heart-count");
+let heartCount = parseInt(heartCountEl.textContent);
+
+document.querySelectorAll(".heart-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        heartCount++;
+        heartCountEl.textContent = heartCount;
     });
 });
+
+
+//  Call button functionality
+const coinEl = document.getElementById("coin-balance");
+let coins = parseInt(coinEl.textContent);
+
+const historyContainer = document.getElementById("history-container");
+
+document.querySelectorAll(".card").forEach(card => {
+    // select elements inside this specific card
+    const serviceName = card.querySelector(".service-name").textContent;
+    const serviceNumber = card.querySelector(".service-number").textContent;
+
+    card.querySelector(".call-btn").addEventListener("click", () => {
+        if (coins < 20) {
+            alert("Not enough coins! You need at least 20 to make a call.");
+            return;
+        }
+
+        // Deduct coins
+        coins -= 20;
+        coinEl.textContent = coins;
+
+        alert(`Calling ${serviceName} at ${serviceNumber}`);
+
+        // Add to history
+        const time = new Date().toLocaleTimeString();
+        const entry = document.createElement("div");
+        entry.className = "history flex justify-between items-center my-2 p-2 rounded bg-gray-50";
+        entry.innerHTML = `
+            <div class="service-info">
+              <h4 class="font-bold text-[18px]">${serviceName}</h4>
+              <p class="text-gray-400">${serviceNumber}</p>
+            </div>
+            <div class="time-stamp">
+              <p class="text-gray-600 text-nowrap">${time}</p>
+            </div>
+        `;
+        historyContainer.appendChild(entry);
+    });
+});
+
+document.getElementById("clear-btn").addEventListener("click", () => {
+    historyContainer.innerHTML = "";
+});
+
+
+// Add copy functionality
+const copyEl = document.getElementById("copy-count");
+let copyCount = parseInt(copyEl.textContent);
+
+document.querySelectorAll(".copy-btn").forEach(btn => {
+    btn.addEventListener("click", async () => {
+        const number = btn.getAttribute("data-number");
+        try {
+            await navigator.clipboard.writeText(number);
+
+            // Temporarily change button text
+            const span = btn.querySelector("span");
+            const prev = span.textContent;
+            span.textContent = "Copied!";
+            setTimeout(() => span.textContent = prev, 1200);
+
+            // Increment navbar copy count
+            copyCount++;
+            copyEl.textContent = copyCount;
+
+        } catch {
+            alert("Copy not supported on this browser");
+        }
+    });
+});
+
+
+document.querySelectorAll(".card").forEach(card => {
+    const numberEl = card.querySelector(".service-number");
+    numberEl.addEventListener("click", async () => {
+        const number = numberEl.textContent;
+
+        try {
+            await navigator.clipboard.writeText(number);
+
+            // Visual feedback
+            const prevColor = numberEl.style.color;
+            numberEl.style.color = "#00a639";
+            setTimeout(() => numberEl.style.color = prevColor, 800);
+
+            alert(`Copied ${number} to clipboard!`);
+        } catch {
+            alert("Copy not supported on this browser");
+        }
+    });
+}); 
