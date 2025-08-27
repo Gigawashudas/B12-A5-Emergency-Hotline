@@ -142,11 +142,6 @@ document.querySelectorAll(".card").forEach(card => {
         try {
             await navigator.clipboard.writeText(number);
 
-            // Visual feedback
-            const prevColor = numberEl.style.color;
-            numberEl.style.color = "#00a639";
-            setTimeout(() => numberEl.style.color = prevColor, 800);
-
             alert(`Copied ${number} to clipboard!`);
         } catch {
             alert("Copy not supported on this browser");
