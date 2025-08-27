@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     container.classList.add("grid", "grid-col-3", "gap-[30px]")
     container.innerHTML = cards.map(card => `
-    <div class="card flex flex-col gap-3 rounded-2xl bg-white p-8">
+    <div class="card flex flex-col gap-3 rounded-2xl bg-white p-6">
           <!-- section-1 -->
           <div class="flex justify-between items-center">
             <!-- card-icon -->
