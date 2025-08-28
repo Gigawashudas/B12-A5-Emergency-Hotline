@@ -118,7 +118,7 @@ document.querySelectorAll(".card").forEach(card => {
     btn.addEventListener("click", async () => {
         const name = card.querySelector(".service-name").textContent;
         const number = card.querySelector(".service-number").textContent;
-        const info =`Service Name: ${name}\nHotline Numver: ${number}`;
+        const info = `Service Name: ${name}\nHotline Numver: ${number}`;
         try {
             await navigator.clipboard.writeText(info);
 
