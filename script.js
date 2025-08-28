@@ -27,7 +27,7 @@ container.innerHTML = cards.map(card => `
         </div>
         <!-- section-2 -->
         <div class="card-section-2">
-            <h3 class="service-name text-[18px] font-semibold">${card.title}</h3>
+            <h3 class="service-name text-nowrap text-[18px] font-semibold">${card.title}</h3>
             <p class="text-gray-500">${card.subtitle}</p>
         </div>
         <!-- section-3 -->
