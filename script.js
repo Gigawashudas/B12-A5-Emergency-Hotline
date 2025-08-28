@@ -17,37 +17,37 @@ const container = document.getElementById("card-container");
 container.classList.add("grid", "grid-col-3", "gap-[30px]")
 container.innerHTML = cards.map(card => `
     <div class="card flex flex-col gap-3 rounded-2xl bg-white p-6">
-          <!-- section-1 -->
-          <div class="flex justify-between items-center">
+        <!-- section-1 -->
+        <div class="flex justify-between items-center">
             <!-- card-icon -->
             <div class="card-section-1 flex justify-center items-center rounded-2xl w-[60px] h-[60px] bg-[${card.iconBg}]">
-              <img class="w-[32px] h-[32px]" src="${card.icon}" alt="">
+            <img class="w-[32px] h-[32px]" src="${card.icon}" alt="">
             </div>
             <i class="fa-regular fa-heart fa-lg text-gray-500 heart-btn cursor-pointer"></i>
-          </div>
-          <!-- section-2 -->
-          <div class="card-section-2">
+        </div>
+        <!-- section-2 -->
+        <div class="card-section-2">
             <h3 class="service-name text-[18px] font-semibold">${card.title}</h3>
             <p class="text-gray-500">${card.subtitle}</p>
-          </div>
-          <!-- section-3 -->
-          <div class="section-3">
+        </div>
+        <!-- section-3 -->
+        <div class="section-3">
             <h2 class="service-number w-fit cursor-pointer text-[32px] text-3xl font-semibold">${card.number}</h2>
             <p class="text-gray-400 text-[18px] bg-gray-100 rounded-2xl px-4 py-0.5 w-fit">${card.tag}</p>
-          </div>
-          <!-- button-section -->
-          <div class="card-section-button roboto flex gap-2">
+        </div>
+        <!-- button-section -->
+        <div class="card-section-button roboto flex gap-2">
             <button class="copy-btn w-[50%] cursor-pointer py-0.5 border border-gray-200 text-gray-400 rounded text-[16px]">
-              <i class="fa-solid fa-copy"></i>
-              <span> Copy</span>
+            <i class="fa-solid fa-copy"></i>
+            <span> Copy</span>
             </button>
             <button class="call-btn cursor-pointer w-[50%] bg-[#00a639] text-white rounded text-[16px]">
-              <i class="fa-solid fa-phone-flip fa-rotate-90 fa-sm"></i>
-              <span>Call</span>
+            <i class="fa-solid fa-phone-flip fa-rotate-90 fa-sm"></i>
+            <span>Call</span>
             </button>
-          </div>
         </div>
-  `).join("");
+        </div>
+`).join("");
 
 
 //  Heart functionality
@@ -93,11 +93,11 @@ document.querySelectorAll(".card").forEach(card => {
         entry.className = "history flex justify-between items-center my-2 p-2 rounded bg-gray-50";
         entry.innerHTML = `
             <div class="service-info">
-              <h4 class="font-bold text-[18px]">${serviceName}</h4>
-              <p class="text-gray-400">${serviceNumber}</p>
+            <h4 class="font-bold text-[18px]">${serviceName}</h4>
+            <p class="text-gray-400">${serviceNumber}</p>
             </div>
             <div class="time-stamp">
-              <p class="text-gray-600 text-nowrap">${time}</p>
+            <p class="text-gray-600 text-nowrap">${time}</p>
             </div>
         `;
         historyContainer.appendChild(entry);
