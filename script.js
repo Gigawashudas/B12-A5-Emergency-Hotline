@@ -155,9 +155,9 @@ document.querySelectorAll(".card").forEach(card => {
 const updateCallButtons = () => {
     document.querySelectorAll(".card .call-btn").forEach(btn => {
         if (coins < 20) {
-            btn.classList.add("bg-red-700", "text-gray-500");
+            btn.classList.add("bg-red-700", "text-gray-400");
         } else {
-            btn.classList.remove("bg-red-700", "text-gray-500");
+            btn.classList.remove("bg-red-700", "text-gray-400");
         }
     });
 };
