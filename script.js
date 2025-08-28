@@ -113,11 +113,14 @@ document.getElementById("clear-btn").addEventListener("click", () => {
 const copyEl = document.getElementById("copy-count");
 let copyCount = parseInt(copyEl.textContent);
 
-document.querySelectorAll(".copy-btn").forEach(btn => {
+document.querySelectorAll(".card").forEach(card => {
+    const btn = card.querySelector(".copy-btn");
     btn.addEventListener("click", async () => {
-        const number = btn.getAttribute("data-number");
+        const name = card.querySelector(".service-name").textContent;
+        const number = card.querySelector(".service-number").textContent;
+        const info =`Service Name: ${name}\nHotline Numver: ${number}`;
         try {
-            await navigator.clipboard.writeText(number);
+            await navigator.clipboard.writeText(info);
 
             // Temporarily change button text
             const span = btn.querySelector("span");
