@@ -156,4 +156,3 @@ document.getElementById("menu-btn").addEventListener("click", () => {
 document.getElementById("history-close-btn").addEventListener("click", () => {
     document.getElementById("call-history").classList.toggle("max-xl:hidden");
 });
-
