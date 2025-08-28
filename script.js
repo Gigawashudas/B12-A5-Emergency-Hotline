@@ -76,12 +76,14 @@ document.querySelectorAll(".card").forEach(card => {
     card.querySelector(".call-btn").addEventListener("click", () => {
         if (coins < 20) {
             alert("Not enough coins! You need at least 20 to make a call.");
+
             return;
         }
 
         // Deduct coins
         coins -= 20;
         coinEl.textContent = coins;
+        updateCallButtons();
 
         alert(`Calling ${serviceName} at ${serviceNumber}`);
 
@@ -147,4 +149,17 @@ document.querySelectorAll(".card").forEach(card => {
             alert("Copy not supported on this browser");
         }
     });
-}); 
+});
+
+// disable call buttons when coin is less then 20
+const updateCallButtons = () => {
+    document.querySelectorAll(".card .call-btn").forEach(btn => {
+        if (coins < 20) {
+            btn.disabled = true;
+            btn.classList.add("bg-red-700", "text-gray-500", "cursor-not-allowed");
+        } else {
+            btn.disabled = false;
+            btn.classList.remove("bg-red-700", "text-gray-500", "cursor-pointer", "cursor-not-allowed");
+        }
+    });
+};
