@@ -116,11 +116,9 @@ let copyCount = parseInt(copyEl.textContent);
 document.querySelectorAll(".card").forEach(card => {
     const btn = card.querySelector(".copy-btn");
     btn.addEventListener("click", async () => {
-        const name = card.querySelector(".service-name").textContent;
         const number = card.querySelector(".service-number").textContent;
-        const info = `Service Name: ${name}\nHotline Numver: ${number}`;
         try {
-            await navigator.clipboard.writeText(info);
+            await navigator.clipboard.writeText(number);
 
             // Temporarily change button text
             const span = btn.querySelector("span");
@@ -132,22 +130,6 @@ document.querySelectorAll(".card").forEach(card => {
             copyCount++;
             copyEl.textContent = copyCount;
 
-        } catch {
-            alert("Copy not supported on this browser");
-        }
-    });
-});
-
-
-document.querySelectorAll(".card").forEach(card => {
-    const numberEl = card.querySelector(".service-number");
-    numberEl.addEventListener("click", async () => {
-        const number = numberEl.textContent;
-
-        try {
-            await navigator.clipboard.writeText(number);
-
-            alert(`Copied ${number} to clipboard!`);
         } catch {
             alert("Copy not supported on this browser");
         }
