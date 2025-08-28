@@ -151,7 +151,7 @@ document.querySelectorAll(".card").forEach(card => {
     });
 });
 
-// disable call buttons when coin is less then 20
+//  buttons red when coin is less then 20
 const updateCallButtons = () => {
     document.querySelectorAll(".card .call-btn").forEach(btn => {
         if (coins < 20) {
